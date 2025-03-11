@@ -1,2 +1,4 @@
 # legit
-Legit TV
+Krintz-TV
+
+funky design
