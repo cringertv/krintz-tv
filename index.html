@@ -6,7 +6,7 @@
     <meta name="description" content="ΛΕΓΙΤ webTV - A modern web-based television platform">
     <meta name="keywords" content="webTV, television, streaming, news, entertainment">
     <meta name="robots" content="index, follow">
-    <title>ΚΡΙΝΤΖ webTV</title>
+    <title>KRINTZ webTV</title>
     
     <!-- Import Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
@@ -20,6 +20,16 @@
             --font-family: 'VT323', monospace;
             --title-font: 'Press Start 2P', cursive;
             --transition-speed: 0.3s;
+            --text-color: #ffffff;
+            --text-secondary: #cccccc;
+            --footer-bg: rgba(0, 0, 0, 0.9);
+            --disclaimer-bg: rgba(0, 0, 0, 0.95);
+            --disclaimer-border: var(--accent-color);
+            --shadow-color: rgba(0, 255, 0, 0.3);
+            --glow-color: rgba(255, 0, 255, 0.5);
+            --border-width: 2px;
+            --border-radius: 4px;
+            --spacing-unit: 8px;
         }
 
         * {
@@ -54,9 +64,10 @@
             width: 100%;
             height: 5%;
             background: rgba(0, 0, 0, 0.8);
-            border-bottom: 3px solid var(--primary-color);
+            border-bottom: var(--border-width) solid var(--primary-color);
             overflow: visible;
             z-index: 2;
+            box-shadow: 0 2px 10px var(--shadow-color);
         }
 
         @keyframes scrollNews {
@@ -89,25 +100,25 @@
             width: 100%;
             height: 80vh;
             max-width: 1200px;
-            border: 4px solid var(--primary-color);
-            border-radius: 0;
+            border: var(--border-width) solid var(--primary-color);
+            border-radius: var(--border-radius);
             box-shadow: 
-                0 0 20px var(--primary-color),
-                0 0 40px var(--accent-color);
+                0 0 20px var(--shadow-color),
+                0 0 40px var(--glow-color);
             transition: all var(--transition-speed) ease;
         }
 
         .controls {
             z-index: 3;
             position: absolute;
-            bottom: 20px;
+            bottom: calc(var(--spacing-unit) * 2.5);
             left: 0;
             width: 100%;
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: calc(var(--spacing-unit) * 2.5);
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity var(--transition-speed) ease;
             pointer-events: none;
         }
 
@@ -118,37 +129,39 @@
 
         button {
             background: var(--secondary-color);
-            border: 2px solid var(--primary-color);
+            border: var(--border-width) solid var(--primary-color);
             color: var(--primary-color);
-            padding: 10px 20px;
+            padding: calc(var(--spacing-unit) * 1.25) calc(var(--spacing-unit) * 2.5);
             font-family: var(--font-family);
             font-size: 1.2em;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all var(--transition-speed) ease;
             text-transform: uppercase;
             letter-spacing: 2px;
-            box-shadow: 0 0 10px var(--primary-color);
+            box-shadow: 0 0 10px var(--shadow-color);
+            border-radius: var(--border-radius);
         }
 
         button:hover {
             background: var(--primary-color);
             color: var(--secondary-color);
             transform: scale(1.1);
-            box-shadow: 0 0 20px var(--accent-color);
+            box-shadow: 0 0 20px var(--glow-color);
         }
 
         .branding {
             display: flex;
             font-size: 2rem;
             position: absolute;
-            top: 30px;
-            left: 80px;
+            top: calc(var(--spacing-unit) * 3.75);
+            left: calc(var(--spacing-unit) * 10);
             font-family: var(--title-font);
             color: var(--primary-color);
             text-shadow: 
                 2px 2px 0 var(--accent-color),
                 -2px -2px 0 var(--accent-color);
             animation: glitch 1s infinite;
+            z-index: 4;
         }
 
         @keyframes glitch {
@@ -159,6 +172,58 @@
             80% { transform: translate(2px, -2px); }
             100% { transform: translate(0); }
         }
+         /* Footer */
+         .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--footer-bg);
+            padding: calc(var(--spacing-unit) * 0.25) 0;
+            text-align: center;
+            border-top: var(--border-width) solid var(--accent-color);
+            z-index: 4;
+            height: calc(var(--spacing-unit) * 3);
+            box-shadow: 0 -2px 10px var(--shadow-color);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 calc(var(--spacing-unit) * 2.5);
+            height: 100%;
+        }
+
+        .footer-section {
+            flex: 1;
+            padding: 0 calc(var(--spacing-unit) * 1.875);
+            border-right: var(--border-width) solid var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit));
+            height: 100%;
+        }
+
+        .footer-section:last-child {
+            border-right: none;
+        }
+
+        .footer-section h4 {
+            color: var(--accent-color);
+            font-size: 0.75rem;
+            margin: 0;
+            text-shadow: 1px 1px 0 var(--shadow-color);
+        }
+
+        .footer-section p {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            margin: 0;
+        }
+
 
         .transition-overlay {
             position: absolute;
@@ -178,15 +243,53 @@
 
         .video-info {
             position: absolute;
-            bottom: 100px;
+            bottom: calc(var(--spacing-unit) * 12.5);
             left: 0;
             width: 100%;
             text-align: center;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity var(--transition-speed) ease;
             background: rgba(0, 0, 0, 0.8);
-            padding: 20px;
-            border: 2px solid var(--primary-color);
+            padding: calc(var(--spacing-unit) * 2.5);
+            border: var(--border-width) solid var(--primary-color);
+            border-radius: var(--border-radius);
+            box-shadow: 0 0 15px var(--shadow-color);
+        }
+
+        .comment-display {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: calc(var(--spacing-unit) * 2.5);
+            border: var(--border-width) solid var(--accent-color);
+            max-width: 80%;
+            text-align: center;
+            z-index: 10;
+            opacity: 0;
+            transition: opacity var(--transition-speed) ease;
+            border-radius: var(--border-radius);
+            box-shadow: 0 0 20px var(--glow-color);
+        }
+
+        .comment-display img {
+            max-width: 100%;
+            max-height: 300px;
+            margin: calc(var(--spacing-unit) * 1.25) 0;
+            border: var(--border-width) solid var(--primary-color);
+            border-radius: var(--border-radius);
+        }
+
+        .comment-display p {
+            color: var(--primary-color);
+            font-size: 1.2em;
+            margin: calc(var(--spacing-unit) * 1.25) 0;
+            text-shadow: 1px 1px 0 var(--shadow-color);
+        }
+
+        .comment-display.show {
+            opacity: 1;
         }
 
         .player-container:hover .video-info {
@@ -196,7 +299,7 @@
         h2 {
             font-family: var(--title-font);
             font-size: 1.2rem;
-            margin-bottom: 5px;
+            margin-bottom: calc(var(--spacing-unit) * 0.625);
             color: var(--primary-color);
             text-shadow: 2px 2px 0 var(--accent-color);
         }
@@ -204,8 +307,98 @@
         p {
             color: var(--accent-color);
             font-size: 1.1em;
+            line-height: 1.4;
+        }
+        /* Privacy Disclaimer */
+        .privacy-disclaimer {
+            position: fixed;
+            bottom: calc(var(--spacing-unit) * 5);
+            right: calc(var(--spacing-unit) * 2.5);
+            background: var(--disclaimer-bg);
+            border: var(--border-width) solid var(--disclaimer-border);
+            border-radius: var(--border-radius);
+            padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 2.5);
+            z-index: 5;
+            width: 40%;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            color: var(--text-secondary);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: all var(--transition-speed) ease;
+            opacity: 0.9;
         }
 
+        .privacy-disclaimer.hide {
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+        }
+
+        .privacy-disclaimer strong {
+            color: var(--accent-color);
+            display: block;
+            margin-bottom: calc(var(--spacing-unit) * 0.5);
+            text-shadow: 1px 1px 0 var(--shadow-color);
+        }
+
+        .privacy-disclaimer .browser-recommendations {
+            margin-top: calc(var(--spacing-unit));
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .privacy-disclaimer .browser-recommendations a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color var(--transition-speed) ease;
+            text-shadow: 1px 1px 0 var(--shadow-color);
+        }
+
+        .privacy-disclaimer .browser-recommendations a:hover {
+            color: var(--text-color);
+        }
+
+        /* Thank you button styles */
+        .thank-you-btn {
+            display: block;
+            margin-top: calc(var(--spacing-unit) * 1.5);
+            padding: calc(var(--spacing-unit)) calc(var(--spacing-unit) * 2);
+            background: var(--accent-color);
+            color: var(--secondary-color);
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: bold;
+            transition: all var(--transition-speed) ease;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            text-shadow: 1px 1px 0 var(--shadow-color);
+        }
+
+        .thank-you-btn::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: var(--border-width);
+            width: 100%;
+            background: var(--secondary-color);
+            transform-origin: left;
+            transform: scaleX(0);
+        }
+
+        .thank-you-btn.counting::after {
+            transform: scaleX(1);
+            transition: transform 20s linear;
+        }
+
+        .thank-you-btn:hover {
+            background: var(--text-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--glow-color);
+        }
         @media (max-width: 768px) {
             .youtube-player {
                 width: 95%;
@@ -214,6 +407,23 @@
             
             h2 {
                 font-size: 1rem;
+            }
+            .privacy-disclaimer {
+                top: calc(var(--spacing-unit) * 6.25);
+                right: calc(var(--spacing-unit) * 1.25);
+                left: calc(var(--spacing-unit) * 1.25);
+                max-width: none;
+            }
+            .branding {
+                left: calc(var(--spacing-unit) * 2.5);
+                font-size: 1.5rem;
+            }
+            .controls {
+                gap: calc(var(--spacing-unit));
+            }
+            button {
+                padding: calc(var(--spacing-unit)) calc(var(--spacing-unit) * 1.5);
+                font-size: 1em;
             }
         }
     </style>
@@ -224,12 +434,14 @@
     </div>
     <div class="player-container">
         <div class="branding">
-            <h3>ΛΕΓΙΤ webTV</h3>
+            <h3>ΚΡΙΝΤΖ webTV beta</h3>
         </div>
         
         <div class="transition-overlay"></div>
         
         <div class="youtube-player" id="player"></div>
+        
+        <div class="comment-display" id="comment-display"></div>
         
         <div class="video-info">
             <h2 id="video-title">Loading...</h2>
@@ -244,14 +456,99 @@
             <button id="fullscreen-btn" aria-label="Toggle Fullscreen">Fullscreen</button>
         </div>
     </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Υποστήριξη</h4>
+                <p>CringeTV</p>
+            </div>
+            <div class="footer-section">
+                <h4>Πρόγραμμα Ποταμός TV</h4>
+                <p>Σύντομα εδώ</p>
+            </div>
+            <div class="footer-section">
+                <h4>Παραγωγή</h4>
+                <p>Plantango</p>
+            </div>
+        </div>
+    </footer>
+    <div class="privacy-disclaimer">
+        <strong>🔒 Προστασία προσωπικών δεδομένων</strong>
+        <p>Δεν υπάρχει συλλογή δεδομένων ή παρακολούθηση. Αυτή είναι μια απλή, ασφαλής και αγνή πλατφόρμα ιντερνετικής τηλεόρασης.</p>
+        <div class="browser-recommendations">
+            Προτείνεται ΑΥΣΤΗΡΑ η χρήση 2 browsers: Του ανοιχτού λογισμικού <a href="https://www.mozilla.org/firefox" target="_blank">Firefox</a> ΑΠΑΡΑΙΤΗΤΑ με τον ad-blocker <a href="https://ublockorigin.com" target="_blank">uBlock Origin</a> ή <a href="https://brave.com" target="_blank">Brave</a>
+        </div>
+        <button class="thank-you-btn" id="thankYouBtn">Καλή θέαση/ακρόαση!</button>
+    </div>
 
     <script>
         // Combined and optimized JavaScript
         const playlist = [
-            "5v3Zq84YQ6I", "11qXS8bXdsc", "7263YsyaDBc", "PelzSnmwQ-M", 
-            "lmVAb_7vzYA", "w7k5xPIpuN0", "wyVTQdW3d_Q", "RVWadttGEPM", 
-            "6aM2IvVudxM", "PyLNiOkzyRU", "FGWICvtZn74", "QWs56m8QniI", 
-            "0URH98uvG7w"
+            {
+                videoId: "5v3Zq84YQ6I",
+                comment: "Welcome to KrintzTV!",
+                image: null
+            },
+            {
+                videoId: "11qXS8bXdsc",
+                comment: "Enjoy this amazing content!",
+                image: "path/to/image1.jpg"
+            },
+            {
+                videoId: "7263YsyaDBc",
+                comment: "Stay tuned for more!",
+                image: null
+            },
+            {
+                videoId: "PelzSnmwQ-M",
+                comment: "Don't forget to subscribe!",
+                image: "path/to/image2.jpg"
+            },
+            {
+                videoId: "lmVAb_7vzYA",
+                comment: "Thanks for watching!",
+                image: null
+            },
+            {
+                videoId: "w7k5xPIpuN0",
+                comment: "Check out our other videos!",
+                image: null
+            },
+            {
+                videoId: "wyVTQdW3d_Q",
+                comment: "Follow us on social media!",
+                image: null
+            },
+            {
+                videoId: "RVWadttGEPM",
+                comment: "New content coming soon!",
+                image: null
+            },
+            {
+                videoId: "6aM2IvVudxM",
+                comment: "Share with your friends!",
+                image: null
+            },
+            {
+                videoId: "PyLNiOkzyRU",
+                comment: "Like and comment below!",
+                image: null
+            },
+            {
+                videoId: "FGWICvtZn74",
+                comment: "Stay connected!",
+                image: null
+            },
+            {
+                videoId: "QWs56m8QniI",
+                comment: "Thanks for your support!",
+                image: null
+            },
+            {
+                videoId: "0URH98uvG7w",
+                comment: "Don't miss our next video!",
+                image: null
+            }
         ];
         const rssFeedUrl = 'https://corsproxy.io/' + encodeURIComponent('https://www.news.gr/rss.ashx');
         const newsScroller = document.getElementById('newsScroller');
@@ -313,14 +610,14 @@
             player = new YT.Player('player', {
                 height: '100%',
                 width: '100%',
-                videoId: playlist[currentVideoIndex],
+                videoId: playlist[currentVideoIndex].videoId,
                 playerVars: {
                     autoplay: 1,
                     mute: 1,
                     modestbranding: 1,
                     rel: 0,
                     controls: 0,
-                    disablekb: 1,
+                    disablekb: 0,
                     iv_load_policy: 3,
                     showinfo: 0
                 },
@@ -359,6 +656,15 @@
                         overlay.style.opacity = '0';
                     }, 500);
                 }, 1000);
+            } else if (event.data === YT.PlayerState.PLAYING) {
+                // Show video info when video starts playing
+                const videoInfo = document.querySelector('.video-info');
+                videoInfo.style.opacity = '1';
+                
+                // Hide video info after 5 seconds
+                setTimeout(() => {
+                    videoInfo.style.opacity = '0';
+                }, 5000);
             }
         }
 
@@ -384,11 +690,12 @@
 
         function loadNewVideo() {
             player.loadVideoById({
-                videoId: playlist[currentVideoIndex],
+                videoId: playlist[currentVideoIndex].videoId,
                 startSeconds: 0,
                 suggestedQuality: 'hd720'
             });
             updateVideoInfo();
+            showComment();
         }
 
         function updateVideoInfo() {
@@ -397,6 +704,27 @@
             
             videoTitle.textContent = `Παρακολουθείτε το ${currentVideoIndex + 1} από τα ${playlist.length} βίντεα`;
             videoDescription.textContent = 'Καλωσήρθατε στην πχοιοτική τηλεόραση';
+        }
+
+        function showComment() {
+            const commentDisplay = document.getElementById('comment-display');
+            const currentVideo = playlist[currentVideoIndex];
+            
+            let commentHTML = '';
+            if (currentVideo.comment) {
+                commentHTML += `<p>${currentVideo.comment}</p>`;
+            }
+            if (currentVideo.image) {
+                commentHTML += `<img src="${currentVideo.image}" alt="Comment image">`;
+            }
+            
+            commentDisplay.innerHTML = commentHTML;
+            commentDisplay.classList.add('show');
+            
+            // Hide comment after 5 seconds
+            setTimeout(() => {
+                commentDisplay.classList.remove('show');
+            }, 5000);
         }
 
         function toggleFullscreen() {
@@ -424,6 +752,28 @@
                 document.getElementById('mute-btn').textContent = 'Mute';
             }
         }
+        document.addEventListener('DOMContentLoaded', function() {
+            const thankYouBtn = document.getElementById('thankYouBtn');
+            const privacyDisclaimer = document.querySelector('.privacy-disclaimer');
+            let autoCloseTimer;
+
+            function startAutoClose() {
+                thankYouBtn.classList.add('counting');
+                autoCloseTimer = setTimeout(() => {
+                    closeDisclaimer();
+                }, 20000);
+            }
+
+            function closeDisclaimer() {
+                privacyDisclaimer.classList.add('hide');
+                setTimeout(() => {
+                    privacyDisclaimer.style.display = 'none';
+                }, 500);
+            }
+
+            thankYouBtn.addEventListener('click', closeDisclaimer);
+            startAutoClose();
+        });
     </script>
 </body>
 </html>
